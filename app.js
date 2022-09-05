@@ -44,14 +44,9 @@ app.post("/", function(req, res) {
 
   const run = async () => {
     const response = await mailchimp.lists.batchListMembers(audienceId, jsonData);
-    console.log(response.errors);
     if (response.errors.length > 0){
-      console.log(response.errors);
-      console.log("We messed up!");
       res.sendFile(__dirname + "/failure.html");
     } else {
-      console.log(response);
-      console.log("Perfect!");
       res.sendFile(__dirname + "/success.html");
     }
   };
