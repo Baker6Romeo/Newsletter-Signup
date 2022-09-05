@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bodyParser = require("body-parser");
 const express = require("express");
 const mailchimp = require("@mailchimp/mailchimp_marketing");
@@ -5,10 +6,9 @@ const request = require("request");
 
 const app = express();
 
-const apiKey = "326217b4a63596c1845ef84fce06595d-us13";
-const audienceId = "ea084b66ec"
-// const endpoint = "https://us13.api.mailchimp.com/3.0/"
-const endpoint = "https://us13.api.mailchimp.com/3.0/lists/ea084b66ec"
+const apiKey = process.env.MAILCHIMP_API_KEY;
+const audienceId = process.env.MAILCHIMP_TEST_AUDIENCE_ID;
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({
   extended: true
@@ -50,7 +50,6 @@ app.post("/", function(req, res) {
       res.sendFile(__dirname + "/success.html");
     }
   };
-
   run();
 });
 
